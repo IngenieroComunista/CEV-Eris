@@ -488,7 +488,10 @@ var/global/list/robot_modules = list(
 					"Sleek" = "sleekengineer",
 					"Spider" = "spidereng",
 					"Plated" = "ceborg",
-					"Heavy" = "heavyeng"
+					"Heavy" = "heavyeng",
+					"B1" = "b1_droid-tech",
+					"Astromech R4" = "R4_Astromech_C-tech",
+					"Astomech R2" = "R2_Astromech_C-tech"
 					)
 	health = 240 //Slightly above average
 	speed_factor = 1.1 //Slightly above average
@@ -702,7 +705,13 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-sec",
 					"Classic" = "secborg",
 					"Spider" = "spidersec",
-					"Heavy" = "heavysec"
+					"Heavy" = "heavysec",
+					"Droideka" = "droideka-sec",
+					"Droideka Alt" = "droideka-g-sec",
+					"B2 Droid" = "b2-droid-sec",
+					"Commando" = "bx-commando-sec",
+					"R2 Astromech" = "R2_Astromech_A-sec",
+					"R4 Astromech" = "R4_Astromech_A-sec"
 				)
 
 /obj/item/weapon/robot_module/security/general/New(var/mob/living/silicon/robot/R)
@@ -742,7 +751,8 @@ var/global/list/robot_modules = list(
 					"Classic" = "janbot2",
 					"Buffer" = "mechaduster",
 					"Sleek" = "sleekjanitor",
-					"Maid" = "maidbot"
+					"Maid" = "maidbot",
+					"Assistant" = "tac-droid-service"
 					)
 	health = 250 //Bulky
 	speed_factor = 1.0 // Normal speed, its a cleaning unit and you wouldnt choose it if you sweep floors with ultra slow movement
@@ -887,7 +897,8 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-miner",
 					"Classic" = "miner_old",
 					"Heavy" = "heavymine",
-					"Spider" = "spidermining"
+					"Spider" = "spidermining",
+					"Sb1 Droid" = "sb1-droid-mine"
 				)
 	health = 250 //Pretty tough
 	speed_factor = 0.9 //meh
