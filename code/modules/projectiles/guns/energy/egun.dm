@@ -57,4 +57,3 @@
 	overlays.Cut()
 	if(cell && cell.charge >= charge_cost) //no overlay if we dont have any power
 		update_mode()
-
