@@ -21,13 +21,13 @@
 		WEAPON_CHARGE,
 		)
 
-/obj/item/weapon/gun/energy/egun/customounted
+/obj/item/weapon/gun/energy/egun/mounted
 	name = "mounted hibrid gun"
 	self_recharge = TRUE
 	use_external_power = TRUE
 	safety = FALSE
 	restrict_safety = FALSE
 
-/obj/item/weapon/gun/energy/egun/customounted/cyborg
+/obj/item/weapon/gun/energy/egun/mounted/cyborg
 	name = "Hybrid Gun"
 	recharge_time = 10
