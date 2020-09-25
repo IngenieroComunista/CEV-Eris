@@ -7,20 +7,17 @@
 	item_charge_meter = TRUE
 	can_dual = 1
 	fire_sound = 'sound/weapons/Taser.ogg'
-
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	modifystate = "energystun"
 	item_modifystate = "stun"
-
+	self_recharge = TRUE
+	use_external_power = TRUE
+	safety = FALSE
+	restrict_safety = TRUE
+	recharge_time = 10
 	init_firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun", item_modifystate="stun", fire_sound='sound/weapons/Taser.ogg', icon="stun"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill", item_modifystate="kill", fire_sound='sound/weapons/Laser.ogg', icon="kill"),
 		WEAPON_CHARGE,
-		)
-	name = "mounted hibrid gun"
-	self_recharge = TRUE
-	use_external_power = TRUE
-	safety = FALSE
-	restrict_safety = FALSE
-	recharge_time = 10
+	)
