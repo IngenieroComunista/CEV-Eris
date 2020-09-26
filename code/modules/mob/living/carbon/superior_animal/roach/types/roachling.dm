@@ -24,7 +24,7 @@
 
 		if(amount_grown >= 100) // Old enough to turn into an adult
 			var/spawn_type
-			if (fed > 0) // If roachling has eaten a corpse
+			if (fed > 0 || prob(generation*15)) // If roachling has eaten a corpse
 				spawn_type = /mob/living/carbon/superior_animal/roach/fuhrer
 			else
 				spawn_type = /obj/spawner/mob/roaches
