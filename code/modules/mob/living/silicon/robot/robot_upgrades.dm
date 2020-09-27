@@ -113,8 +113,8 @@
 
 
 /obj/item/borg/upgrade/tasercooler
-	name = "robotic Rapid Taser Cooling Module"
-	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
+	name = "robotic Rapid Hybrid Cooling Module"
+	desc = "Used to cool a mounted hybird weapon, increasing the potential current in it and thus its recharge rate."
 	icon_state = "cyborg_upgrade3"
 	matter = list(MATERIAL_STEEL = 8, MATERIAL_GLASS = 6, MATERIAL_GOLD = 2, MATERIAL_DIAMOND = 2)
 	require_module = TRUE
@@ -128,13 +128,13 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 
-	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in R.module
+	var/obj/item/weapon/gun/energy/gun/mounted/cyborg/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.contents
 	if(!T)
 		T = locate() in R.module.modules
 	if(!T)
-		to_chat(usr, "This robot has had its taser removed!")
+		to_chat(usr, "This robot has had its hybrid weapon removed!")
 		return 0
 
 	if(T.recharge_time <= 2)

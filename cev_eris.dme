@@ -1236,6 +1236,7 @@
 #include "code\hispania\__HELPERS\mobs.dm"
 #include "code\hispania\game\objects\items\weapons\kitchen.dm"
 #include "code\hispania\game\objects\items\weapons\manuals.dm"
+#include "code\hispania\game\objects\items\weapons\guns\energy\egun.dm"
 #include "code\hispania\modules\clothing\clothing.dm"
 #include "code\hispania\modules\food\food.dm"
 #include "code\hispania\modules\food\recipes_microwave.dm"
