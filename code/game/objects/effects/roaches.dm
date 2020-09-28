@@ -68,7 +68,7 @@
 
 		var/spawn_type = /mob/living/carbon/superior_animal/roach/roachling
 		var/mob/living/carbon/superior_animal/roach/roachling/R = new spawn_type(src.loc, src)
-		R.generation = generation + 1
+		R.generation = generation
 		qdel(src)
 
 /obj/effect/decal/cleanable/roach_egg_remains
