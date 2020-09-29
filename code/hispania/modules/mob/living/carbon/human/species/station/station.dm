@@ -13,7 +13,7 @@
 	language = LANGUAGE_KIDAN           // Default racial language, if any.
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR
 	num_alternate_languages = 1
-	min_age = 18
+	min_age = 15
 	max_age = 60
 	unarmed_types = list(/datum/unarmed_attack/claws, /datum/unarmed_attack/stomp,  /datum/unarmed_attack/kick, /datum/unarmed_attack/bite)
 	reagent_tag = IS_KIDAN
@@ -67,6 +67,22 @@
 	blood_color = "#1D2CBF"
 	base_color = "#38b661" //RGB: 56, 182, 97.
 	eyes = "skrell_eyes"
+	min_age = 25
+	max_age = 150
+	breath_pressure = 30                          // Minimum partial pressure safe for breathing, kPa
+	cold_level_1 = 220                            // from 260
+	cold_level_2 = 160                            // from 200
+	cold_level_3 = 80                            // from 120
+	heat_level_1 = 310                            // from 360
+	heat_level_2 = 350                            // from 400
+	heat_level_3 = 9950                           // Heat damage level 3 above this point.
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE+15   // Dangerously high pressure.
+	warning_high_pressure = WARNING_HIGH_PRESSURE+15 // High pressure warning.
+	warning_low_pressure = WARNING_LOW_PRESSURE+15   // Low pressure warning.
+	hazard_low_pressure = HAZARD_LOW_PRESSURE+15     // Dangerously low pressure.
+	heat_discomfort_level = 300                   // from 315
+	cold_discomfort_level = 270                   // from 285
+	body_temperature = 295	                  // from 310.15
 	//Default styles for created mobs.
 	reagent_tag = IS_SKRELL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
