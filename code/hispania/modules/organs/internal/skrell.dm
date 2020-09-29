@@ -83,4 +83,27 @@
 
 /obj/item/organ/internal/eyes/skrell
 	name = "skrell eyeballs"
+	icon_state = "skrell_eyes"
 	icon = 'icons/hispania/obj/species/organs/skrell.dmi'
+
+/obj/item/organ/internal/eyes/skrell/get_icon()
+	var/icon/eyes_icon = new/icon('icons/hispania/mob/human_face.dmi', "skrell_eye_l")
+	eyes_icon.Blend(icon('icons/hispania/mob/human_face.dmi', "skrell_eye_r"), ICON_OVERLAY)
+	eyes_icon.Blend(BP_IS_ROBOTIC(src) ? robo_color : eyes_color, ICON_ADD)
+	return eyes_icon
+
+//Subtypes
+/obj/item/organ/internal/eyes/skrell/oneeye
+	icon_state = "skrell_eyes_l"
+	cache_key = "left_eye"
+
+/obj/item/organ/internal/eyes/skrell/oneeye/get_icon()
+	var/icon/eyes_icon
+	eyes_icon = icon('icons/hispania/mob/human_face.dmi', "[icon_state]")
+	eyes_icon.Blend(BP_IS_ROBOTIC(src) ? robo_color : eyes_color, ICON_ADD)
+	return eyes_icon
+
+/obj/item/organ/internal/eyes/skrell/oneeye/right
+	icon_state = "skrell_eyes_r"
+	cache_key = "right_eye"
+// fin subtypes

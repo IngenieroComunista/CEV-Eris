@@ -366,6 +366,11 @@ var/global/list/damage_icon_parts = list()
 			var/icon/hair_s = new/icon(hair_style.icon, hair_style.icon_state)
 			if(hair_style.do_colouration)
 				hair_s.Blend(hair_color, ICON_ADD)
+			if(hair_style.secondary_theme)//hispania para accesorios en el peinado
+				var/icon/hair_secondary_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_[hair_style.secondary_theme]")
+				if(!hair_style.no_sec_colour)
+					hair_secondary_s.Blend(hair_color, ICON_ADD)
+				hair_s.Blend(hair_secondary_s, ICON_OVERLAY)//fin hispania
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 

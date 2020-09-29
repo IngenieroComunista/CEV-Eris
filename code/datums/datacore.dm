@@ -241,6 +241,12 @@ var/global/ManifestJSON
 		temp = new/icon(hair_style.icon, hair_style.icon_state)
 		temp.Blend(H.hair_color, ICON_ADD)
 
+		if(hair_style.secondary_theme)
+			var/icon/hair_secondary_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_[hair_style.secondary_theme]")
+			if(!hair_style.no_sec_colour)
+				hair_secondary_s.Blend(H.hair_color, ICON_ADD)
+			temp.Blend(hair_secondary_s, ICON_OVERLAY)
+
 	hair_style = GLOB.facial_hair_styles_list[H.h_style]
 	if(hair_style)
 		var/icon/facial = new/icon(hair_style.icon, hair_style.icon_state)
