@@ -24,7 +24,6 @@
 
 		if(amount_grown >= 100) // Old enough to turn into an adult
 			var/spawn_type
-			var/mob/living/carbon/superior_animal/roach/R = new spawn_type(src.loc, src)
 			if (fed > 0 || prob(generation*15)) // If roachling has eaten a corpse
 				spawn_type = /mob/living/carbon/superior_animal/roach/fuhrer
 			else
@@ -35,6 +34,6 @@
 					/mob/living/carbon/superior_animal/roach/hunter = 4,
 					/mob/living/carbon/superior_animal/roach/support = 4,
 					/mob/living/carbon/superior_animal/roach/fuhrer = 0.5))
-			new spawn_type(src.loc, src)
+			var/mob/living/carbon/superior_animal/roach/R = new spawn_type(src.loc, src)
 			R.generation = generation
 			qdel(src)
