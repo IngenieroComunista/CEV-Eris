@@ -5,4 +5,4 @@
 	charge_meter = TRUE
 	charge_cost = 40
 	zoom_factor = 0
-	recharge_time = 4
+	recharge_time = 10
