@@ -21,7 +21,8 @@
 #define HAS_UNDERWEAR     0x8    // Underwear is drawn onto the mob icon.
 #define HAS_EYE_COLOR     0x10   // Eye colour selectable in chargen. (RGB)
 #define HAS_HAIR_COLOR    0x20   // Hair colour selectable in chargen. (RGB)
-#define HAS_FACIAL_MIMETISATION 0x40 //para que el vello tenga el mismo color que la piel
+#define HAS_HAIR_MIMETISATION 0x40 //para que el cabello tenga el mismo color que la piel
+#define HAS_FACIAL_MIMETISATION 0x80 //para que el vello tenga el mismo color que la piel
 
 // Languages.
 #define LANGUAGE_COMMON "English Common"

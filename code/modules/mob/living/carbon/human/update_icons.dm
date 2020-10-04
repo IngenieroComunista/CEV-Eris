@@ -352,11 +352,14 @@ var/global/list/damage_icon_parts = list()
 			var/icon/facial_s = new/icon(facial_hair_style.icon, facial_hair_style.icon_state)
 			if(facial_hair_style.do_colouration)
 				facial_s.Blend(facial_color, ICON_ADD)
-			else if(species && (species.appearance_flags & HAS_FACIAL_MIMETISATION) && (species.appearance_flags & HAS_SKIN_TONE) && s_tone)//mimetiza el vello facial con el de la piel
-				if(s_tone >= 0)
-					facial_s.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-				else
-					facial_s.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)//fin hispania
+			else if(species && (species.appearance_flags & HAS_FACIAL_MIMETISATION))//mimetiza el vello facial con el de la piel
+				if(species.appearance_flags & HAS_SKIN_COLOR)
+					facial_s.Blend(skin_color, ICON_ADD)
+				if((species.appearance_flags & HAS_SKIN_TONE) && s_tone)
+					if(s_tone >= 0)
+						facial_s.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+					else
+						facial_s.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)//fin hispania
 			face_standing.Blend(facial_s, ICON_OVERLAY)
 
 	if(h_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
@@ -365,6 +368,14 @@ var/global/list/damage_icon_parts = list()
 			var/icon/hair_s = new/icon(hair_style.icon, hair_style.icon_state)
 			if(hair_style.do_colouration)
 				hair_s.Blend(hair_color, ICON_ADD)
+			else if(species && (species.appearance_flags & HAS_HAIR_MIMETISATION))
+				if(species.appearance_flags & HAS_SKIN_COLOR)
+					hair_s.Blend(skin_color, ICON_ADD)
+				if((species.appearance_flags & HAS_SKIN_TONE))//mimetiza el vello facial con el de la piel)
+					if(s_tone >= 0)
+						hair_s.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+					else
+						hair_s.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)//fin hispania
 			if(hair_style.secondary_theme)//hispania para accesorios en el peinado
 				var/icon/hair_secondary_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_[hair_style.secondary_theme]")
 				if(!hair_style.no_sec_colour)

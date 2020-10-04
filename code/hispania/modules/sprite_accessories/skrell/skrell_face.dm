@@ -1,6 +1,7 @@
 /datum/sprite_accessory/hair/skrell
 	icon = 'icons/hispania/mob/human_races/species/skrell/skrell_hair.dmi'
 	species_allowed = list(SPECIES_SKRELL)
+	do_colouration = FALSE
 
 /datum/sprite_accessory/hair/skrell/skr_tentacle_m
 	name = "Skrell Male Tentacles"

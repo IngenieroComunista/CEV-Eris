@@ -59,10 +59,9 @@
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
 
-
 	//species_traits = list(LIPS)
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_COLOR
+	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_COLOR | HAS_HAIR_MIMETISATION | HAS_FACIAL_MIMETISATION
 	taste_sensitivity = TASTE_DULL
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
@@ -87,7 +86,7 @@
 	//Default styles for created mobs.
 	reagent_tag = IS_SKRELL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
-
+	genders = list(NEUTER)
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart/skrell,
 		BP_LUNGS =    /obj/item/organ/internal/lungs/skrell,
