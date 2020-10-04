@@ -3,7 +3,7 @@
 	name_plural = SPECIES_KIDAN
 	icobase = 'icons/hispania/mob/human_races/r_kidan.dmi'
 	deform = 'icons/hispania/mob/human_races/r_def_kidan.dmi'
-	faceicobase = 'icons/hispania/mob/kidan_face.dmi'
+	faceicobase = 'icons/hispania/mob/human_face.dmi'
 	blurb = "The Kidan are ant-like creatures who posses an exoskeleton. \
 	They originate from the world of Aurum, a harsh world with a poor atmosphere now lost with the destruction of the Milky Way. \
 	The last Kidan Empress was killed and their planets conquered at least a century ago in a war with humanity. \
@@ -11,7 +11,7 @@
 	Most of the kidan in Canis Major are now refugees."
 	name_language = LANGUAGE_KIDAN
 	language = LANGUAGE_KIDAN           // Default racial language, if any.
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR | HAS_FACIAL_MIMETISATION
 	num_alternate_languages = 1
 	min_age = 15
 	max_age = 60
@@ -47,6 +47,7 @@
 	name_plural = SPECIES_SKRELL
 	icobase = 'icons/hispania/mob/human_races/r_skrell.dmi'
 	deform = 'icons/hispania/mob/human_races/r_def_skrell.dmi'
+	faceicobase = 'icons/hispania/mob/human_face.dmi'
 	name_language = LANGUAGE_SKRELL
 	language = LANGUAGE_SKRELL
 	num_alternate_languages = 1
@@ -61,7 +62,7 @@
 
 	//species_traits = list(LIPS)
 	spawn_flags = CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_FACIAL_COLOR | HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_SKIN_COLOR
 	taste_sensitivity = TASTE_DULL
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
@@ -69,9 +70,9 @@
 	eyes = "skrell_eyes"
 	min_age = 25
 	max_age = 150
-	breath_pressure = 30                          // Minimum partial pressure safe for breathing, kPa
+	breath_pressure = 20                          // Minimum partial pressure safe for breathing, kPa from 16
 	cold_level_1 = 220                            // from 260
-	cold_level_2 = 160                            // from 200
+	cold_level_2 = 160								// from 200
 	cold_level_3 = 80                            // from 120
 	heat_level_1 = 310                            // from 360
 	heat_level_2 = 350                            // from 400
@@ -80,9 +81,9 @@
 	warning_high_pressure = WARNING_HIGH_PRESSURE+15 // High pressure warning.
 	warning_low_pressure = WARNING_LOW_PRESSURE+15   // Low pressure warning.
 	hazard_low_pressure = HAZARD_LOW_PRESSURE+15     // Dangerously low pressure.
-	heat_discomfort_level = 300                   // from 315
-	cold_discomfort_level = 270                   // from 285
-	body_temperature = 295	                  // from 310.15
+	heat_discomfort_level = 300						// from 315
+	cold_discomfort_level = 270						// from 285
+	body_temperature = 295							// from 310.15
 	//Default styles for created mobs.
 	reagent_tag = IS_SKRELL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
@@ -95,7 +96,6 @@
 		BP_BRAIN =    /obj/item/organ/internal/brain/skrell,
 		BP_APPENDIX  = /obj/item/organ/internal/appendix,
 		BP_EYES  =     /obj/item/organ/internal/eyes/skrell, //Default darksight of 2.
-		"headpocket" = /obj/item/organ/internal/headpocket
 		)
 
 /datum/species/skrell/get_bodytype()
