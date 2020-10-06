@@ -168,10 +168,9 @@ SUBSYSTEM_DEF(job)
 						weightedCandidates[V] = 6 // Still good.
 					if((job.ideal_character_age+20) to INFINITY)
 						weightedCandidates[V] = 3 // Geezer.
-					else
-						// If there's ABSOLUTELY NOBODY ELSE
-						if(candidates.len == 1) weightedCandidates[V] = 1
-
+				if(V.client.prefs.species != SPECIES_HUMAN)//si no es humano tiene una minima posibilidad de ser del comando because es una nave humana
+					weightedCandidates[V] = 1
+				if(candidates.len == 1) weightedCandidates[V] = 1 // If there's ABSOLUTELY NOBODY ELSE
 
 			var/mob/new_player/candidate = pickweight(weightedCandidates)
 			if(AssignRole(candidate, command_position))
