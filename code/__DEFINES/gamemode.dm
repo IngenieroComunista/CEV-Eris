@@ -27,7 +27,7 @@
 #define ANTAG_SKIP_TARGET	-1
 
 // Storyteller names macro
-#define STORYTELLER_BASE "guide"
+#define STORYTELLER_BASE "mime"//el de eris base es "guide", en hispania si no votas el storyteller es el mimo
 
 // antag bantypes macros.
 #define ROLE_BANTYPE_BORER ROLE_BORER
