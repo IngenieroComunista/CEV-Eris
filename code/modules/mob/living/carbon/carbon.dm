@@ -41,7 +41,9 @@
 			if (move_intent.flags & MOVE_INTENT_EXERTIVE)
 				src.nutrition -= DEFAULT_HUNGER_FACTOR/10
 
-
+		if(is_watching == TRUE)
+			reset_view(null)
+			is_watching = FALSE
 		// Moving around increases germ_level faster
 		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 			germ_level++
@@ -93,7 +95,7 @@
 			return
 
 
-/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
+/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
@@ -107,6 +109,7 @@
 			"\red <B>You feel a powerful shock course through your body!</B>", \
 			"\red You hear a heavy electrical crack." \
 		)
+		SEND_SIGNAL(src, COMSIG_CARBON_ELECTROCTE)
 		Stun(10)//This should work for now, more is really silly and makes you lay there forever
 		Weaken(10)
 	else

@@ -1,6 +1,6 @@
 //NOTE: Breathing happens once per FOUR TICKS, unless the last breath fails. In which case it happens once per ONE TICK! So oxyloss healing is done once per 4 ticks while oxyloss damage is applied once per tick!
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
-#define HUMAN_CRIT_MAX_OXYLOSS ( 2.0 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
+#define HUMAN_CRIT_MAX_OXYLOSS ( 2 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
 
 #define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
@@ -58,8 +58,6 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
-		//Updates the number of stored chemicals for powers
-		handle_changeling()
 
 		//Organs and blood
 		handle_organs()
@@ -797,9 +795,6 @@
 						M.adjustBruteLoss(5)
 					nutrition += 10
 
-/mob/living/carbon/human/proc/handle_changeling()
-	if(mind && mind.changeling)
-		mind.changeling.regenerate()
 
 /mob/living/carbon/human/handle_shock()
 	..()
@@ -893,8 +888,6 @@
 		var/image/holder = hud_list[STATUS_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
-		else if(status_flags & XENO_HOST)
-			holder.icon_state = "hudxeno"
 		else if(foundVirus)
 			holder.icon_state = "hudill"
 		else if(has_brain_worms())
@@ -909,8 +902,6 @@
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		if(stat == DEAD)
 			holder2.icon_state = "huddead"
-		else if(status_flags & XENO_HOST)
-			holder2.icon_state = "hudxeno"
 		else if(has_brain_worms())
 			holder2.icon_state = "hudbrainworm"
 		else if(virus2.len)
@@ -1039,7 +1030,11 @@
 			isRemoteObserve = TRUE
 		else if(client.eye && istype(client.eye,/mob/observer/eye/god))
 			isRemoteObserve = TRUE
-		else if((mRemote in mutations) && remoteview_target)
+		else if(client.eye && istype(client.eye,/obj/item/weapon/implant/carrion_spider/observer))
+			isRemoteObserve = TRUE
+		else if(client.eye && istype(client.eye,/obj/structure/multiz))
+			isRemoteObserve = TRUE
+		else if(((mRemote in mutations) || remoteviewer) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)
 				isRemoteObserve = TRUE
 		if(!isRemoteObserve && client && !client.adminobs)

@@ -24,7 +24,7 @@
 	var/has_floating_eyes                                // Eyes will overlay over darkness (glow)
 	var/blood_color = "#A10808"                          // Red.
 	var/flesh_color = "#FFC896"                          // Pink.
-	var/base_color                                       // Used by changelings. Should also be used for icon previes..
+	var/base_color                                       // Used by carrions. Should also be used for icon previes..
 	var/tail                                             // Name of tail state in species effects icon file.
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
 	var/race_key = 0       	                             // Used for mob icon cache string.
@@ -67,11 +67,6 @@
 	var/list/hair_styles
 	var/list/facial_hair_styles
 
-	//Head accessory colour and style
-	var/default_headacc				//Default head accessory style for newly created humans unless otherwise set.
-	var/default_headacc_colour
-	var/headacc_colour = "#000000"
-	var/ha_style = "None"
 
 	// Death vars.
 	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
@@ -137,7 +132,7 @@
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/holder_type
 	var/gluttonous                // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING.
-	var/rarity_value = 1          // Relative rarity/collector value for this species.
+	var/species_rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
 		BP_HEART =    /obj/item/organ/internal/heart,

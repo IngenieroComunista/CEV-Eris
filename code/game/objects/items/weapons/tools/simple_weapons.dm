@@ -16,6 +16,23 @@
 	max_upgrades = 1 //it's not even a tool
 	tool_qualities = list(QUALITY_CUTTING = 10)
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
+	spawn_blacklisted = TRUE
+
+/obj/item/weapon/tool/nailstick
+	name = "nailed stick"
+	desc = "Stick with some nails in it. Looks sharp enough."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "hm_spikeclub"
+	item_state = "hm_spikeclub"
+	force = WEAPON_FORCE_PAINFUL
+	throwforce = WEAPON_FORCE_PAINFUL
+	w_class = ITEM_SIZE_NORMAL
+	origin_tech = list(TECH_COMBAT = 2)
+	attack_verb = list("beaten", "slammed", "smacked", "struck", "battered")
+	structure_damage_factor = STRUCTURE_DAMAGE_HEAVY
+	max_upgrades = 5
+	tool_qualities = list(QUALITY_HAMMERING = 10)
+	spawn_blacklisted = TRUE
 
 /obj/item/weapon/tool/hatchet
 	name = "hatchet"
@@ -33,6 +50,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	attack_verb = list("chopped", "torn", "cut")
 	tool_qualities = list(QUALITY_CUTTING = 20)
+	spawn_blacklisted = TRUE
 
 /obj/item/weapon/tool/fireaxe
 	name = "fire axe"
@@ -51,8 +69,10 @@
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	structure_damage_factor = STRUCTURE_DAMAGE_BREACHING
 	embed_mult = 1 //Axes cut deep, and their hooked shape catches on things
+	spawn_tags = SPAWN_TAG_TOOL_ADVANCED
+	rarity_value = 48
 
-/obj/item/weapon/tool/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+/obj/item/weapon/tool/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
 	if(!proximity) return
 	..()
 	if(A && wielded)
@@ -89,9 +109,10 @@
 	slot_flags = SLOT_BACK
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
 	tool_qualities = list(QUALITY_CUTTING = 15)
+	spawn_tags = SPAWN_TAG_KNIFE
+	rarity_value = 30
 
 //Swords
-
 /obj/item/weapon/tool/sword
 	name = "claymore"
 	desc = "What are you standing around staring at this for? Get to killing!"
@@ -112,6 +133,9 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	tool_qualities = list(QUALITY_CUTTING = 10)
 	structure_damage_factor = STRUCTURE_DAMAGE_BLADE
+	spawn_frequency = 8
+	spawn_tags = SPAWN_TAG_SWORD
+	rarity_value = 25
 
 /obj/item/weapon/tool/sword/katana //slightly less penetration, slightly more damage
 	name = "katana"
@@ -121,6 +145,7 @@
 	matter = list(MATERIAL_PLASTEEL = 10, MATERIAL_STEEL = 5, MATERIAL_DIAMOND = 1) //sharpened using diamond dust or whatever
 	force = WEAPON_FORCE_BRUTAL
 	armor_penetration = ARMOR_PEN_MODERATE
+	rarity_value = 35
 
 /obj/item/weapon/tool/sword/katana/nano
 	name = "\improper Moebius \"Muramasa\" katana"
@@ -137,6 +162,8 @@
 	switched_on_qualities = list(QUALITY_CUTTING = 25)
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 6)
 	switched_on_force = WEAPON_FORCE_LETHAL
+	rarity_value = 60
+	spawn_blacklisted = TRUE
 
 /obj/item/weapon/tool/sword/katana/nano/turn_on(mob/user)
 	.=..()
@@ -157,3 +184,21 @@
 		overlays += "[icon_state]_power_on"
 	else
 		overlays += "[icon_state]_power_off"
+
+//Flails
+/obj/item/weapon/tool/chainofcommand
+	name = "chain of command"
+	desc = "A tool used by great men to placate the frothing masses."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "chain"
+	item_state = "chain"
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
+	force = WEAPON_FORCE_DANGEROUS
+	throwforce = WEAPON_FORCE_DANGEROUS
+	w_class = ITEM_SIZE_NORMAL
+	origin_tech = list(TECH_COMBAT = 4)
+	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
+	max_upgrades = 2
+	tool_qualities = list(QUALITY_HAMMERING = 5)
+	spawn_blacklisted = TRUE

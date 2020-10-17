@@ -5,6 +5,8 @@
 	icon_state = "folder"
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_BIOMATTER = 2)
+	rarity_value = 5
+	spawn_tags = SPAWN_TAG_JUNK
 
 /obj/item/weapon/folder/blue
 	desc = "A blue folder."
@@ -74,10 +76,10 @@
 			playsound(src,'sound/effects/Paper_Shake.ogg',40,1)
 			if(P && (P.loc == src) && istype(P))
 				if(!(ishuman(usr) || isghost(usr) || issilicon(usr)))
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
+					usr << browse("<HTML><HEAD><META charset=\"UTF-8\"><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 				else
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
+					usr << browse("<HTML><HEAD><META charset=\"UTF-8\"><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 		else if(href_list["look"])
 			var/obj/item/weapon/photo/P = locate(href_list["look"])

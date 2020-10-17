@@ -3,10 +3,11 @@
 	item_state = "laser"
 	desc = "Standard-issue weapon of the Imperial Guard"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
-	self_recharge = 1
+	self_recharge = TRUE
 	matter = list(MATERIAL_PLASTIC = 6)
 	fire_sound = 'sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
+	bad_type = /obj/item/weapon/gun/energy/lasertag
 	var/required_vest
 
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)

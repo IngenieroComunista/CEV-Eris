@@ -77,10 +77,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 	// From old dna.
 	var/b_type = "A+"  // Should probably change to an integer => string map but I'm lazy.
-	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
+	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for carrions,
 
 	// New stuff
-	var/species = "Human"
+	var/species = SPECIES_HUMAN
 
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!

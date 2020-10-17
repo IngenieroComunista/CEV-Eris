@@ -14,6 +14,10 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
+	//Spawn_values
+	bad_type = /obj/item/weapon/cell
+	rarity_value = 3
+	spawn_tags = SPAWN_TAG_POWERCELL
 	var/charge = 0	// note %age conveted to actual charge in New
 	var/maxcharge = 100
 	var/max_chargerate = 0.08 //Power cells are limited in how much power they can intake per charge tick, to prevent small cells from charging almost instantly
@@ -158,6 +162,10 @@
 
 
 /obj/item/weapon/cell/proc/explode()
+	if(QDELETED(src))
+		rigged = FALSE // Prevent error spam
+		throw EXCEPTION("A rigged cell has attempted to explode in nullspace. Usually this means that handle_atom_del handling is missing somewhere.")
+
 	var/turf/T = get_turf(loc)
 /*
  * 1000-cell	explosion(T, -1, 0, 1, 1)

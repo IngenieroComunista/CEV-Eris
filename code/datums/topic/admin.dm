@@ -237,8 +237,6 @@
 			M.change_mob_type( /mob/observer/ghost , null, null, delmob )
 		if("angel")
 			M.change_mob_type( /mob/observer/eye/angel , null, null, delmob )
-		if("larva")
-			M.change_mob_type( /mob/living/carbon/alien/larva , null, null, delmob )
 		if("human")
 			M.change_mob_type( /mob/living/carbon/human , null, null, delmob, input["species"])
 		if("slime")
@@ -567,7 +565,8 @@
 
 
 /datum/admin_topic/boot2
-	keyword = "boot"
+	keyword = "boot2"
+	require_perms = list(R_MOD|R_ADMIN)
 
 /datum/admin_topic/boot2/Run(list/input)
 	var/mob/M = locate(input["boot2"])
@@ -806,6 +805,29 @@
 	log_admin("[key_name(usr)] forced [key_name(M)] to say: [speech]")
 	message_admins("\blue [key_name_admin(usr)] forced [key_name_admin(M)] to say: [speech]")
 
+/datum/admin_topic/forcesanity
+	keyword = "forcesanity"
+	require_perms = list(R_FUN)
+
+/datum/admin_topic/forcesanity/Run(list/input)
+	var/mob/living/carbon/human/H = locate(input["forcesanity"])
+	if(!ishuman(H))
+		to_chat(usr, "This can only be used on instances of type /human.")
+		return
+
+	var/datum/breakdown/B = input("What breakdown will [key_name(H)] suffer from?", "Sanity Breakdown") as null | anything in subtypesof(/datum/breakdown)
+	if(!B)
+		return
+	B = new B(H.sanity)
+	if(!B.can_occur())
+		to_chat(usr, "[B] could not occur. [key_name(H)] did not meet the right conditions.")
+		qdel(B)
+		return
+	if(B.occur())
+		H.sanity.breakdowns += B
+		to_chat(usr, SPAN_NOTICE("[B] has occurred for [key_name(H)]."))
+		return
+
 
 /datum/admin_topic/revive
 	keyword = "revive"
@@ -817,12 +839,9 @@
 		to_chat(usr, "This can only be used on instances of type /mob/living")
 		return
 
-	if(config.allow_admin_rev)
-		L.revive()
-		message_admins("\red Admin [key_name_admin(usr)] healed / revived [key_name_admin(L)]!", 1)
-		log_admin("[key_name(usr)] healed / Revived [key_name(L)]")
-	else
-		to_chat(usr, "Admin Rejuvinates have been disabled")
+	L.revive()
+	message_admins("\red Admin [key_name_admin(usr)] healed / revived [key_name_admin(L)]!", 1)
+	log_admin("[key_name(usr)] healed / Revived [key_name(L)]")
 
 
 /datum/admin_topic/makeai
@@ -1184,6 +1203,30 @@
 	var/mob/M = locate(input["subtlemessage"])
 	usr.client.cmd_admin_subtle_message(M)
 
+/datum/admin_topic/manup
+	keyword = "manup"
+	require_perms = list(R_MOD|R_ADMIN)
+
+/datum/admin_topic/manup/Run(list/input)
+	var/mob/M = locate(input["manup"])
+	usr.client.man_up(M)
+
+/datum/admin_topic/paralyze
+	keyword = "paralyze"
+	require_perms = list(R_MOD|R_ADMIN)
+
+/datum/admin_topic/paralyze/Run(list/input)
+	var/mob/M = locate(input["paralyze"])
+
+	var/msg
+	if (M.paralysis == 0)
+		M.paralysis = 8000
+		msg = "has paralyzed [key_name(M)]."
+	else
+		M.paralysis = 0
+		msg = "has unparalyzed [key_name(M)]."
+		log_and_message_admins(msg)
+
 /datum/admin_topic/viewlogs
 	keyword = "viewlogs"
 	require_perms = list(R_MOD|R_ADMIN)
@@ -1246,10 +1289,6 @@
 	require_perms = list(R_FUN)
 
 /datum/admin_topic/object_list/Run(list/input)
-	if(!config.allow_admin_spawning)
-		to_chat(usr, "Spawning of items is not allowed.")
-		return
-
 	var/atom/loc = usr.loc
 
 	var/dirty_paths

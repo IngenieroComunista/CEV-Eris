@@ -66,8 +66,10 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	init_firemodes = list(
 	SEMI_AUTO_NODELAY,
+	BURST_3_ROUND,
 	BURST_5_ROUND
 	)
 
 	item_suffix = "_wood"
 	wielded_item_state = "_doble_wood"
+	rarity_value = 19.2

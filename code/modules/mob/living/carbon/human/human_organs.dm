@@ -32,6 +32,9 @@
 	if(!force_process && !bad_external_organs.len)
 		return
 
+	for(var/obj/item/organ/external/E in organs)
+		E.handle_bones()
+
 	for(var/obj/item/organ/external/E in bad_external_organs)
 		if(!E)
 			continue
@@ -220,7 +223,7 @@
 			organ_data["descriptor"] = O.name
 			O.set_dna(dna)
 			update_body()
-			if(mind.changeling && O.organ_tag == BP_BRAIN)
+			if(is_carrion(src) && O.organ_tag == BP_BRAIN)
 				O.vital = 0
 			return TRUE
 	else

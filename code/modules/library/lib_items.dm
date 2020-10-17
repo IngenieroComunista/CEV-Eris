@@ -70,18 +70,18 @@
 
 /obj/structure/bookcase/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
 			for(var/obj/item/weapon/book/b in contents)
 				qdel(b)
 			qdel(src)
 			return
-		if(2.0)
+		if(2)
 			for(var/obj/item/weapon/book/b in contents)
 				if (prob(50)) b.loc = (get_turf(src))
 				else qdel(b)
 			qdel(src)
 			return
-		if(3.0)
+		if(3)
 			if (prob(50))
 				for(var/obj/item/weapon/book/b in contents)
 					b.loc = (get_turf(src))
@@ -168,7 +168,7 @@
 			to_chat(user, SPAN_NOTICE("The pages of [title] have been cut out!"))
 			return
 	if(src.dat)
-		user << browse("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", "window=book[window_size != null ? ";size=[window_size]" : ""]")
+		user << browse("<html><head><meta charset=\"UTF-8\"><title>[src.title]</title></head><body><i><tt>Penned by [author]</tt></i><br>" + "[dat]</body></html>", "window=book[window_size != null ? ";size=[window_size]" : ""]")
 		user.visible_message("[user] opens a book titled \"[src.title]\" and begins reading intently.")
 		onclose(user, "book")
 	else

@@ -4,17 +4,17 @@
 	base_type = /datum/stash/junk
 	loot_type = "Junk"
 
-	contents_list_base = list(/obj/random/pack/rare = 2,
-	/obj/random/pouch = 2,
-	/obj/random/tool_upgrade = 3,
-	/obj/random/lowkeyrandom = 5)
+	contents_list_base = list(/obj/spawner/pack/rare = 2,
+	/obj/spawner/pouch = 2,
+	/obj/spawner/tool_upgrade = 3,
+	/obj/spawner/lowkeyrandom = 5)
 
-	contents_list_random = list(/obj/random/pack/rare = 30,
-	/obj/random/pack/rare = 30,
-	/obj/random/lowkeyrandom = 40,
-	/obj/random/lowkeyrandom = 40,
-	/obj/random/tool/advanced = 70)
-
+	contents_list_random = list(/obj/spawner/pack/rare = 30,
+	/obj/spawner/pack/rare = 30,
+	/obj/spawner/lowkeyrandom = 40,
+	/obj/spawner/lowkeyrandom = 40,
+	/obj/spawner/tool/advanced = 70)
+/*
 /datum/stash/junk/inspection
 	story_type = STORY_CRIME
 	directions = DIRECTION_IMAGE
@@ -23,7 +23,7 @@ That prick First Officer keeps doing inspections of personal lockers, claiming s
 threat. I think he just wants to go poking around through my unmentionables, but still, he'll start \
 wondering where all these little odds and ends come from, or what kind of favors he can get. I'll \
 just stuff it here for now, and he can go stuff himself. %D"
-
+*/
 /datum/stash/junk/illicit_trade
 	story_type = STORY_CRIME
 	lore =  "Hey jackass! The ship's computer monitors the emails, the radios, and probably turns on \
@@ -33,7 +33,7 @@ just stuff it here for now, and he can go stuff himself. %D"
 	 Now you're all paid up so don't go fucking talking about our deal, any which damn way,\
 	  because you'll get us both brigged. And for fuck's sake, burn this when you're done?<br><br>\
 	  (The note is mildly singed around the edges, but quite readable)"
-
+/*
 /datum/stash/junk/scrawl
 	story_type = STORY_CRIME
 	directions = DIRECTION_IMAGE
@@ -42,8 +42,8 @@ just stuff it here for now, and he can go stuff himself. %D"
 	 with that sometimes you gotta have shit to swap for whatever when the shit goes down and it always\
 	  goes down and when it does i go down to better not write it i go down to here and these stupid \
 	  people will never find it either"
-	contents_list_extra = list(/obj/random/tool = 10)
-
+	contents_list_extra = list(/obj/spawner/tool = 10)
+*/
 /datum/stash/junk/handoff
 	story_type = STORY_CRIME
 	lore = "Joe, and no that isn't your real name,<br>\
@@ -55,7 +55,7 @@ just stuff it here for now, and he can go stuff himself. %D"
 Signed your pal who isn't named Bob."
 
 /datum/stash/junk/guild
-	contents_list_extra = list(/obj/random/contraband = 6)
+	contents_list_extra = list(/obj/spawner/contraband = 6)
 	base_type = /datum/stash/junk/guild //Prevents this parent type being picked
 
 /datum/stash/junk/guild/crackdown

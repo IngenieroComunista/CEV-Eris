@@ -32,7 +32,7 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	bst.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert/bst(bst), slot_l_ear)
 	bst.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/holding/bst(bst), slot_back)
 	bst.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(bst.back), slot_in_backpack)
-	bst.equip_to_slot_or_del(new /obj/item/clothing/shoes/black/bst(bst), slot_shoes)
+	bst.equip_to_slot_or_del(new /obj/item/clothing/shoes/color/black/bst(bst), slot_shoes)
 	bst.equip_to_slot_or_del(new /obj/item/clothing/head/beret(bst), slot_head)
 	bst.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/bst(bst), slot_glasses)
 	bst.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full/bst(bst), slot_belt)
@@ -63,9 +63,7 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	bst.add_language(LANGUAGE_SERBIAN)
 	bst.add_language(LANGUAGE_MONKEY)
 	// Antagonist languages
-	bst.add_language(LANGUAGE_XENOMORPH)
 	bst.add_language(LANGUAGE_HIVEMIND)
-	bst.add_language(LANGUAGE_CHANGELING)
 	bst.add_language(LANGUAGE_CORTICAL)
 	bst.add_language(LANGUAGE_CULT)
 	bst.add_language(LANGUAGE_OCCULT)
@@ -89,7 +87,7 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	var/fall_override = TRUE
 	var/mob/original_body = null
 
-/mob/living/carbon/human/bst/can_inject(var/mob/user, var/error_msg, var/target_zone)
+/mob/living/carbon/human/bst/can_inject(mob/user, error_msg, target_zone)
 	to_chat(user, span("alert", "The [src] disarms you before you can inject them."))
 	user.drop_item()
 	return FALSE
@@ -179,6 +177,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 
 /obj/item/weapon/storage/backpack/holding/bst
 	worn_access = TRUE
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/device/radio/headset/ert/bst
 	name = "bluespace technician's headset"
@@ -186,6 +186,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	translate_binary = TRUE
 	translate_hive = TRUE
 	keyslot1 = new /obj/item/device/encryptionkey/binary
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/device/radio/headset/ert/bst/attack_hand()
 	if(!usr)
@@ -209,6 +211,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	siemens_coefficient = 0
 	cold_protection = FULL_BODY
 	heat_protection = FULL_BODY
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/clothing/under/assistantformal/bst/attack_hand()
 	if(!usr)
@@ -224,6 +228,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	desc = "A pair of modified gloves. The letters 'BST' are stamped on the side."
 	siemens_coefficient = 0
 	permeability_coefficient = 0
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/clothing/gloves/color/white/bst/attack_hand()
 	if(!usr)
@@ -240,6 +246,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	vision_flags = (SEE_TURFS|SEE_OBJS|SEE_MOBS)
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	flash_protection = FLASH_PROTECTION_MAJOR
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/clothing/glasses/sunglasses/bst/verb/toggle_xray(mode in list("X-Ray without Lighting", "X-Ray with Lighting", "Normal"))
 	set name = "Change Vision Mode"
@@ -269,13 +277,15 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 	else
 		..()
 
-/obj/item/clothing/shoes/black/bst
+/obj/item/clothing/shoes/color/black/bst
 	name = "bluespace technician's shoes"
 	desc = "A pair of black shoes with extra grip. The letters 'BST' are stamped on the side."
 	icon_state = "black"
 	item_flags = NOSLIP
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
-/obj/item/clothing/shoes/black/bst/attack_hand()
+/obj/item/clothing/shoes/color/black/bst/attack_hand()
 	if(!usr)
 		return
 	if(!isbst(usr))
@@ -289,6 +299,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 /obj/item/weapon/card/id/bst
 	icon_state = "centcom"
 	desc = "An ID straight from Central Command. This one looks highly classified."
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/weapon/card/id/bst/New()
 		access = get_all_accesses()+get_all_centcom_access()+get_all_syndicate_access()
@@ -304,6 +316,8 @@ ADMIN_VERB_ADD(/client/proc/cmd_dev_bst, R_ADMIN|R_DEBUG, TRUE)
 
 /obj/item/weapon/storage/belt/utility/full/bst
 	storage_slots = 14
+	spawn_blacklisted = TRUE
+	rarity_value = 100
 
 /obj/item/weapon/storage/belt/utility/full/bst/populate_contents()
 	..()

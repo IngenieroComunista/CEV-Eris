@@ -18,7 +18,7 @@
 	var/clone_l = getCloneLoss()
 
 	health = maxHealth - oxy_l - tox_l - clone_l - total_burn - total_brute
-
+	SEND_SIGNAL(src, COMSIG_HUMAN_HEALTH, health)
 	//TODO: fix husking
 	if( ((maxHealth - total_burn) < HEALTH_THRESHOLD_DEAD) && stat == DEAD)
 		ChangeToHusk()
@@ -357,6 +357,11 @@ This function restores all organs.
 /mob/living/carbon/human/apply_damage(damage = 0, damagetype = BRUTE, def_zone = null, sharp = FALSE, edge = FALSE, obj/used_weapon = null)
 
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
+
+	//Handle PSY damage
+	if(damagetype == PSY)
+		sanity.onPsyDamage(damage)
+		return 1
 
 	//Handle other types of damage
 	if(damagetype != BRUTE && damagetype != BURN)

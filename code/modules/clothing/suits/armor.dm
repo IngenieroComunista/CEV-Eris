@@ -8,6 +8,8 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 	price_tag = 200
+	style = 1
+	spawn_tags = SPAWN_TAG_CLOTHING_ARMOR
 
 /*
  * Vests
@@ -18,6 +20,7 @@
 	icon_state = "armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
+	rarity_value = 3.46
 	armor = list(
 		melee = 30,
 		bullet = 30,
@@ -100,6 +103,7 @@
 	icon_state = "flakvest"
 	item_state = "armor"
 	blood_overlay_type = "armor"
+	rarity_value = 18
 	armor = list(
 		melee = 35,
 		bullet = 35,
@@ -121,6 +125,7 @@
 	item_state = "armor"
 	blood_overlay_type = "armor"
 	slowdown = 0.15
+	rarity_value = 6
 	armor = list(
 		melee = 25,
 		bullet = 55,
@@ -174,6 +179,7 @@
 	item_state = "ablative"
 	blood_overlay_type = "armor"
 	slowdown = 0.15
+	rarity_value = 45
 	armor = list(
 		melee = 25,
 		bullet = 25,
@@ -205,6 +211,19 @@
 
 			return PROJECTILE_CONTINUE // complete projectile permutation
 
+/obj/item/clothing/suit/armor/greatcoat/german_overcoat
+	name = "Oberth Republic uniform overcoat"
+	desc = "A black overcoat made out of special materials that will protect against energy projectiles. Probably surplus."
+	icon_state = "germancoat"
+	item_state = "germancoat"
+	armor = list(
+		melee = 30,
+		bullet = 30,
+		energy = 45,
+		bomb = 15,
+		bio = 0,
+		rad = 0
+	)
 
 /*
  * Heavy Armor Types
@@ -224,6 +243,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	slowdown = 0.6
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	rarity_value = 50
 	armor = list(
 		melee = 35,
 		bullet = 35,
@@ -234,6 +254,7 @@
 	)
 	equip_delay = 2 SECONDS
 	price_tag = 250
+	style = 0
 
 /obj/item/clothing/suit/armor/heavy/red
 	name = "Thunderdome suit (red)"
@@ -256,6 +277,7 @@
 	icon_state = "riot"
 	item_state = "swat_suit"
 	flags_inv = NONE
+	rarity_value = 90
 	armor = list(
 		melee = 75,
 		bullet = 25,
@@ -302,6 +324,7 @@
 	desc = "A high-quality armor vest in a fetching tan. It is surprisingly flexible and light, even with the added webbing and armor plating."
 	icon_state = "mercwebvest"
 	item_state = "mercwebvest"
+	rarity_value = 90
 	armor = list(
 		melee = 55,
 		bullet = 55,

@@ -108,7 +108,7 @@
 			warn_prob = 1
 			alert = 1
 			failed_exhale = 1
-			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
+			var/ratio = 1 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
 			if (owner.getOxyLoss() < 50*ratio)
 				oxyloss = HUMAN_MAX_OXYLOSS
 		else if(exhaled_pp > safe_exhaled_max * 0.6)
@@ -156,6 +156,8 @@
 	return !failed_breath
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
+	if(!species)
+		return
 	// Hot air hurts :(
 	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in owner.mutations))
 		var/damage = 0

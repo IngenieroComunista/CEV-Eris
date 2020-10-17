@@ -1,15 +1,22 @@
 /* Drugs */
 /datum/reagent/drug
 	reagent_type = "Drug"
+	sanity_gain = 0.5
 
-	var/sanity_gain
+/datum/reagent/drug/on_mob_add(mob/living/L)
+	..()
+	SEND_SIGNAL(L, COMSIG_CARBON_HAPPY, src, MOB_ADD_DRUG)
 
 /datum/reagent/drug/affect_blood(mob/living/carbon/M, alien, effect_multiplier)
 	if(sanity_gain)
 		var/mob/living/carbon/human/H = M
 		if(istype(H))
 			H.sanity.onDrug(src, effect_multiplier)
+		SEND_SIGNAL(M, COMSIG_CARBON_HAPPY, src, ON_MOB_DRUG)
 
+/datum/reagent/drug/on_mob_delete(mob/living/L)
+	..()
+	SEND_SIGNAL(L, COMSIG_CARBON_HAPPY, src, MOB_DELETE_DRUG)
 
 /datum/reagent/drug/space_drugs
 	name = "Space drugs"
@@ -217,6 +224,8 @@
 	withdrawal_threshold = 10
 	nerve_system_accumulations = 55
 	reagent_type = "Drug/Stimulator"
+	sanity_gain = 0
+
 
 /datum/reagent/drug/hyperzine/affect_blood(mob/living/carbon/M, alien, effect_multiplier)
 	if(prob(5))

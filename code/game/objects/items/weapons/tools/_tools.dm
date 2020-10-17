@@ -14,14 +14,22 @@
 	throwforce = WEAPON_FORCE_NORMAL
 	w_class = ITEM_SIZE_SMALL
 
+	//spawn values
+	bad_type = /obj/item/weapon/tool
+	spawn_tags = SPAWN_TAG_TOOL
+
 	var/tool_in_use = FALSE
+
+	var/force_upgrade_mults = 1
+
+	var/force_upgrade_mods = 0
 
 	var/sparks_on_use = FALSE	//Set to TRUE if you want to have sparks on each use of a tool
 	var/eye_hazard = FALSE	//Set to TRUE should damage users eyes if they without eye protection
 
 	var/use_power_cost = 0	//For tool system, determinze how much power tool will drain from cells, 0 means no cell needed
-	var/obj/item/weapon/cell/cell = null
-	var/suitable_cell = null	//Dont forget to edit this for a tool, if you want in to consume cells
+	var/obj/item/weapon/cell/cell
+	var/suitable_cell	//Dont forget to edit this for a tool, if you want in to consume cells
 	var/passive_power_cost = 1 //Energy consumed per process tick while active
 
 	var/use_fuel_cost = 0	//Same, only for fuel. And for the sake of God, DONT USE CELLS AND FUEL SIMULTANEOUSLY.
@@ -50,11 +58,11 @@
 
 	var/toggleable = FALSE	//Determines if it can be switched ON or OFF, for example, if you need a tool that will consume power/fuel upon turning it ON only. Such as welder.
 	var/switched_on = FALSE	//Curent status of tool. Dont edit this in subtypes vars, its for procs only.
-	var/switched_on_qualities = null	//This var will REPLACE tool_qualities when tool will be toggled on.
-	var/switched_on_force = null
-	var/switched_off_qualities = null	//This var will REPLACE tool_qualities when tool will be toggled off. So its possible for tool to have diferent qualities both for ON and OFF state.
+	var/switched_on_qualities	//This var will REPLACE tool_qualities when tool will be toggled on.
+	var/switched_on_force
+	var/switched_off_qualities	//This var will REPLACE tool_qualities when tool will be toggled off. So its possible for tool to have diferent qualities both for ON and OFF state.
 	var/create_hot_spot = FALSE	 //Set this TRUE to ignite plasma on turf with tool upon activation
-	var/glow_color = null	//Set color of glow upon activation, or leave it null if you dont want any light
+	var/glow_color	//Set color of glow upon activation, or leave it null if you dont want any light
 	var/last_tooluse = 0 //When the tool was last used for a tool operation. This is set both at the start of an operation, and after the doafter call
 
 	//Vars for tool upgrades
@@ -353,9 +361,14 @@
 		if (T && T.item_flags & SILENT)
 			volume = 3
 			extrarange = -6
+		else if (T && T.item_flags & LOUD)
+			volume = 500
+			extrarange = 10
 
 		var/soundfile
-		if(forced_sound)
+		if (T && T.item_flags & HONKING)
+			soundfile = WORKSOUND_HONK
+		else if(forced_sound)
 			soundfile = forced_sound
 		else
 			soundfile = worksound
@@ -472,7 +485,7 @@
 *******************************/
 
 //Critical failure rolls. If you use use_tool_extended, you might want to call that proc as well.
-/obj/item/proc/handle_failure(var/mob/living/user, var/atom/target, var/required_stat, required_quality)
+/obj/item/proc/handle_failure(mob/living/user, atom/target, required_stat, required_quality)
 	var/obj/item/weapon/tool/T
 	if(istype(src, /obj/item/weapon/tool))
 		T = src
@@ -636,25 +649,19 @@
 
 //We are cheking if our item got required qualities. If we require several qualities, and item posses more than one of those, we ask user to choose how that item should be used
 /obj/item/proc/get_tool_type(mob/living/user, list/required_qualities, atom/use_on, datum/callback/CB)
-	var/list/L = required_qualities & tool_qualities
-
-	if(!L.len)
-		return FALSE
-
-	var/return_quality
-	if(L.len > 1)
-		for(var/i in L)
-			L[i] = image(icon = 'icons/mob/radial/tools.dmi', icon_state = i)
-		return_quality = show_radial_menu(user, use_on ? use_on : user, L, tooltips = TRUE, require_near = TRUE, custom_check = CB)
-	else
-		return_quality = L[1]
-
-	if(!return_quality)
+	if(!tool_qualities) //This is not a tool, or does not have tool qualities
 		return
 
-	return return_quality
+	var/list/L = required_qualities & tool_qualities
 
-/obj/item/weapon/tool/proc/turn_on(var/mob/user)
+	if(L.len)
+		if(L.len == 1)
+			return L[1]
+		for(var/i in L)
+			L[i] = image(icon = 'icons/mob/radial/tools.dmi', icon_state = i)
+		return show_radial_menu(user, use_on ? use_on : user, L, tooltips = TRUE, require_near = TRUE, custom_check = CB)
+
+/obj/item/weapon/tool/proc/turn_on(mob/user)
 	if(use_power_cost)
 		if(!cell)
 			to_chat(user, SPAN_WARNING("\The [src] has no cell!"))
@@ -677,7 +684,7 @@
 	update_wear_icon()
 	return TRUE
 
-/obj/item/weapon/tool/proc/turn_off(var/mob/user)
+/obj/item/weapon/tool/proc/turn_off(mob/user)
 	if(user)
 		to_chat(user, SPAN_NOTICE("\The [src] turns off."))
 	switched_on = FALSE
@@ -699,10 +706,10 @@
 /*********************
 	Resource Consumption
 **********************/
-/obj/item/proc/consume_resources(var/timespent, var/user)
+/obj/item/proc/consume_resources(timespent, user)
 	return
 
-/obj/item/weapon/tool/consume_resources(var/timespent, var/user)
+/obj/item/weapon/tool/consume_resources(timespent, user)
 	//We will always use a minimum of 0.5 second worth of resources
 	if (timespent < 5)
 		timespent = 5
@@ -758,7 +765,7 @@
 
 //Returns the amount of fuel in tool
 /obj/item/weapon/tool/proc/get_fuel()
-	return reagents.get_reagent_amount("fuel")
+	return ( reagents ? reagents.get_reagent_amount("fuel") : 0 )
 
 /obj/item/weapon/tool/proc/consume_fuel(var/volume)
 	if (get_fuel() >= volume)
@@ -792,6 +799,8 @@
 	use_fuel_cost = initial(use_fuel_cost)
 	use_power_cost = initial(use_power_cost)
 	force = initial(force)
+	force_upgrade_mults = initial(force_upgrade_mults)
+	force_upgrade_mods = initial(force_upgrade_mods)
 	switched_on_force = initial(switched_on_force)
 	extra_bulk = initial(extra_bulk)
 	item_flags = initial(item_flags)
@@ -950,17 +959,6 @@
 		if(safety<FLASH_PROTECTION_MAJOR)
 			if(E.damage > 10)
 				to_chat(user, SPAN_WARNING("Your eyes are really starting to hurt. This can't be good for you!"))
-
-			if (E.damage >= E.min_broken_damage)
-				to_chat(H, SPAN_DANGER("You go blind!"))
-				H.sdisabilities |= BLIND
-			else if (E.damage >= E.min_bruised_damage)
-				to_chat(H, SPAN_DANGER("You go blind!"))
-				H.eye_blind = 5
-				H.eye_blurry = 5
-				H.disabilities |= NEARSIGHTED
-				spawn(100)
-					H.disabilities &= ~NEARSIGHTED
 
 
 /obj/item/weapon/tool/attack(mob/living/M, mob/living/user, var/target_zone)

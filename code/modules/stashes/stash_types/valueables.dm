@@ -3,7 +3,7 @@
 /datum/stash/valueable
 	base_type = /datum/stash/valueable
 	loot_type = "Valueables"
-	contents_list_base = list(/obj/random/credits/c5000 = 1)
+	contents_list_base = list(/obj/spawner/credits/c5000 = 1)
 
 	contents_list_random = list(/obj/item/stack/material/diamond/random = 10,
 	/obj/item/stack/telecrystal/random = 5,
@@ -11,9 +11,9 @@
 	/obj/item/stack/material/gold/random = 15,
 	/obj/item/stack/material/silver/random = 25,
 	/obj/item/weapon/moneybag/vault = 15,
-	/obj/random/credits/c5000 = 30,
-	/obj/random/credits/c1000 = 60,
-	/obj/random/credits/c500 = 90)
+	/obj/spawner/credits/c5000 = 30,
+	/obj/spawner/credits/c1000 = 60,
+	/obj/spawner/credits/c500 = 90)
 
 /datum/stash/valueable/poker
 
@@ -52,7 +52,7 @@ I have taken the Church relics and secreted them here <br>\
 /datum/stash/valueable/pirate
 	base_type = /datum/stash/valueable/pirate
 	contents_list_extra = list(/obj/item/weapon/melee/energy/sword/pirate = 1, /obj/item/clothing/glasses/eyepatch)
-
+/*
 /datum/stash/valueable/pirate/treasure
 	directions = DIRECTION_IMAGE
 
@@ -61,7 +61,7 @@ I have taken the Church relics and secreted them here <br>\
 <br>\
 Should any of us fail to assemble, he shall be suspect, and should any plunder be absent, the missing party be hunted unto death. <br>\
 This oath we take of the pirate's code."
-
+*/
 /datum/stash/valueable/pirate/hostage
 	contents_list_external = list(/obj/item/remains/human = 1)
 	lore = "Pirates came aboard and you're still in cryo. How typical of you, Howard. <br>\

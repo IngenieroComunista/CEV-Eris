@@ -1,5 +1,8 @@
 /obj/item/clothing/suit/storage
 	item_flags = DRAG_AND_DROP_UNEQUIP|EQUIP_SOUNDS
+	bad_type = /obj/item/clothing/suit/storage
+	spawn_tags = SPAWN_TAG_CLOTHING_SUIT_STORAGE
+	rarity_value = 10
 	var/obj/item/weapon/storage/internal/pockets
 
 /obj/item/clothing/suit/storage/New()
@@ -56,6 +59,28 @@
 
 
 /obj/item/clothing/suit/storage/vest/merc/New()
+	..()
+	pockets = new/obj/item/weapon/storage/internal(src)
+	pockets.storage_slots = 4
+	pockets.max_w_class = ITEM_SIZE_SMALL
+	pockets.max_storage_space = 8
+
+//Makeshift chest rig.
+/obj/item/clothing/suit/storage/vest/chestrig
+	name = "makeshift chest rig"
+	desc = "A makeshift chest rig made for carrying some stuff. Can carry four small items. Has little protective value.."
+	icon_state = "mchestrig"
+	item_state = "mchestrig"
+	armor = list(
+		melee = 10,
+		bullet = 5,
+		energy = 5,
+		bomb = 5,
+		bio = 0,
+		rad = 0
+	)
+
+/obj/item/clothing/suit/storage/vest/chestrig/New()
 	..()
 	pockets = new/obj/item/weapon/storage/internal(src)
 	pockets.storage_slots = 4
